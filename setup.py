@@ -10,7 +10,6 @@ pyhdfs = Extension('pyhdfs',
                    library_dirs = ['lib'],
                    runtime_library_dirs = ['/usr/local/lib/pyhdfs/','/usr/java/apache-hadoop/lib/native', '/usr/java/openjdk/jre/lib/amd64/server/'],
                    )
-[build]
 setup(name = 'PyHdfs',
       version = '0.1',
       author = 'Deng Zhiping',
