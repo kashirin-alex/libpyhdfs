@@ -7,7 +7,7 @@ pyhdfs = Extension('pyhdfs',
                                    '/usr/java/apache-hadoop/include/',
                                    '/opt/pypy2/include/'],
                    libraries = [],
-                   library_dirs = [],
+                   library_dirs = ['/usr/java/apache-hadoop/lib/native/', '/usr/java/openjdk/jre/lib/amd64/server/'],
                    runtime_library_dirs = ['/usr/java/apache-hadoop/lib/native/', '/usr/java/openjdk/jre/lib/amd64/server/'],
                    )
 setup(name = 'PyHdfs',
