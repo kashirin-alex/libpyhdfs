@@ -30,6 +30,7 @@
 #include <time.h>
 #include <errno.h>
 
+#include "hdfs.h"
 #include <jni.h>
 
 #ifndef O_RDONLY
