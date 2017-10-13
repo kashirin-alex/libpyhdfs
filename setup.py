@@ -2,12 +2,15 @@ from distutils.core import setup, Extension
 
 pyhdfs = Extension('pyhdfs',
                    sources = ['src/pyhdfs.c'],
-                   include_dirs = ['/usr/java/openjdk/include', '/usr/java/openjdk/include/linux/'],
+                   include_dirs = ['/usr/java/openjdk/include',
+                                   '/usr/java/openjdk/include/linux/',
+                                   '/usr/java/apache-hadoop/include/',
+                                   '/opt/pypy2/include/'],
                    libraries = ['hdfs'],
                    library_dirs = ['lib'],
-                   runtime_library_dirs = ['/usr/local/lib/pyhdfs', '/usr/java/openjdk/jre/lib/amd64/server/'],
+                   runtime_library_dirs = ['/usr/local/lib/pyhdfs/','/usr/java/apache-hadoop/lib/native', '/usr/java/openjdk/jre/lib/amd64/server/'],
                    )
-
+[build]
 setup(name = 'PyHdfs',
       version = '0.1',
       author = 'Deng Zhiping',
