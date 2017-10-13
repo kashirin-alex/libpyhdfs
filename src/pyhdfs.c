@@ -21,7 +21,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stddef.h>
-#include "hdfs.h"
+#include <hdfs.h>
 
 #define NO_JAVA_EXCEPTION_OUTPUT 1
 
