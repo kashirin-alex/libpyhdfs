@@ -16,12 +16,12 @@
  * limitations under the License.
  */
 
+#include "hdfs.h" 
 #include <Python.h>
 #include <sys/resource.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <stddef.h>
-#include <hdfs.h>
 
 #define NO_JAVA_EXCEPTION_OUTPUT 1
 
