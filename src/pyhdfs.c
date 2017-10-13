@@ -598,7 +598,7 @@ hdfs_delete(PyObject *self, PyObject *args)
 		return NULL;
 	
 	fs = (hdfsFS)PyLong_AsVoidPtr(pyfs);
-	if (hdfsDelete(fs, path) != -1) 
+	if (hdfsDelete(fs, path, 0) != -1) 
 		Py_RETURN_TRUE;
 	else
 		Py_RETURN_FALSE;
