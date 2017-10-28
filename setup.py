@@ -1,11 +1,15 @@
 from distutils.core import setup, Extension
+import sys
 
+include_dirs=['/usr/java/openjdk/include',
+              '/usr/java/openjdk/include/linux/',
+              '/usr/java/apache-hadoop/include/']
+if 'PyPy' in sys.version:
+  include_dirs.append('/opt/pypy2/include/')
+  
 pyhdfs = Extension('pyhdfs',
                    sources = ['src/pyhdfs.c'],
-                   include_dirs = ['/usr/java/openjdk/include',
-                                   '/usr/java/openjdk/include/linux/',
-                                   '/usr/java/apache-hadoop/include/',
-                                   '/opt/pypy2/include/'],
+                   include_dirs = include_dirs,
                    libraries = ['hdfs'],
                    library_dirs = ['/usr/java/apache-hadoop/lib/native', '/usr/java/openjdk/jre/lib/amd64/server'],		
                    #runtime_library_dirs = ['/usr/java/apache-hadoop/lib/native', '/usr/java/openjdk/jre/lib/amd64/server'],
