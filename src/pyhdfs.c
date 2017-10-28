@@ -823,34 +823,65 @@ static PyMethodDef HdfsMethods[] =
 	{NULL, NULL, 0, NULL}
 };
 
+
+
 struct module_state {
-    PyObject *error;
+	PyObject *error;
 };
+
+#if PY_MAJOR_VERSION >= 3
+#define GETSTATE(m) ((struct module_state*)PyModule_GetState(m))
+#else
+#define GETSTATE(m) (&_state)
+static struct module_state _state;
+#endif
+
+
+#if PY_MAJOR_VERSION >= 3
+
+static int pyhdfs_traverse(PyObject *m, visitproc visit, void *arg) {
+	Py_VISIT(GETSTATE(m)->error);
+	return 0;
+}
+
+static int pyhdfs_clear(PyObject *m) {
+	Py_CLEAR(GETSTATE(m)->error);
+	return 0;
+}
+
 static struct PyModuleDef moduledef = {
-        PyModuleDef_HEAD_INIT,
-        "pyhdfs",
-        NULL,
-        sizeof(struct module_state),
-        HdfsMethods,
-        NULL,
-        NULL,
-        NULL,
-        NULL
+	PyModuleDef_HEAD_INIT,
+	"pyhdfs",
+	NULL,
+	sizeof(struct module_state),
+	HdfsMethods,
+	NULL,
+	pyhdfs_traverse,
+	pyhdfs_clear,
+	NULL
 };
 
 PyMODINIT_FUNC
-initpyhdfs(void)
-{
-	
-#if PY_MAJOR_VERSION >= 3
-    	(void) PyModule_Create(&moduledef);
+PyInit_pyhdfs(void)
+
 #else
-	(void) Py_InitModule("pyhdfs", HdfsMethods);
+
+void
+initpyhdfs(void)
+#endif
+{
+#if PY_MAJOR_VERSION >= 3
+	PyObject *module = PyModule_Create(&moduledef);
+#else
+	PyObject *module = Py_InitModule("pyhdfs", HdfsMethods);
 #endif
 
-	
 	/* no core dump file */
 	struct rlimit rlp;
 	rlp.rlim_cur = 0;
 	setrlimit(RLIMIT_CORE, &rlp);
+
+#if PY_MAJOR_VERSION >= 3
+	return module;
+#endif
 }
