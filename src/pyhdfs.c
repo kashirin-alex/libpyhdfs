@@ -823,11 +823,31 @@ static PyMethodDef HdfsMethods[] =
 	{NULL, NULL, 0, NULL}
 };
 
+struct module_state {
+    PyObject *error;
+};
+static struct PyModuleDef moduledef = {
+        PyModuleDef_HEAD_INIT,
+        "pyhdfs",
+        NULL,
+        sizeof(struct module_state),
+        HdfsMethods,
+        NULL,
+        NULL,
+        NULL,
+        NULL
+};
 
 PyMODINIT_FUNC
 initpyhdfs(void)
 {
+	
+#if PY_MAJOR_VERSION >= 3
+    	(void) PyModule_Create(&moduledef);
+#else
 	(void) Py_InitModule("pyhdfs", HdfsMethods);
+#endif
+
 	
 	/* no core dump file */
 	struct rlimit rlp;
