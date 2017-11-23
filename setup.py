@@ -5,8 +5,10 @@ include_dirs=['/usr/java/openjdk/include',
               '/usr/java/openjdk/include/linux/',
               '/usr/java/apache-hadoop/include/']
 if 'PyPy' in sys.version:
-  include_dirs.append('/opt/pypy2/include/')
-  
+  include_dirs.append('/opt/pypy'+sys.version_info.major+'/include/')
+else:
+  include_dirs.append('/usr/local/include/python'+sys.version_info.major+'.'+sys.version_info.minor)
+
 pyhdfs = Extension('pyhdfs',
                    sources = ['src/pyhdfs.c'],
                    include_dirs = include_dirs,
