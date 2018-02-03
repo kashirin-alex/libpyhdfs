@@ -13,7 +13,7 @@ pyhdfs = Extension('pyhdfs',
                    sources = ['src/pyhdfs.c'],
                    include_dirs = include_dirs,
                    libraries = ['hdfs'],
-                   library_dirs = ['/usr/java/apache-hadoop/lib/native', '/usr/java/openjdk/jre/lib/amd64/server'],		
+                   library_dirs = ['/usr/java/apache-hadoop/lib/native', '/usr/java/openjdk/lib/server/'],		
                    runtime_library_dirs = ['/usr/java/apache-hadoop/lib/native', '/usr/java/openjdk/jre/lib/amd64/server'],
                    )
 setup(name = 'PyHdfs',
