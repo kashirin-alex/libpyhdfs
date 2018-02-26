@@ -7,7 +7,7 @@ include_dirs=['/usr/java/openjdk/include',
 runtime_library_dirs = []
 if 'PyPy' in sys.version:
   include_dirs.append('/opt/pypy'+str(sys.version_info.major)+'/include/')
-  if sys.version.major >= 3:
+  if sys.version_info.major >= 3:
     runtime_library_dirs += ['/usr/java/apache-hadoop/lib/native', '/usr/java/openjdk/lib/server']
 else:
   include_dirs.append('/usr/local/include/python'+str(sys.version_info.major)+'.'+str(sys.version_info.minor))
